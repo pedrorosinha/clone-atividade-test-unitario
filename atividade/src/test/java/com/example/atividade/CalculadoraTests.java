@@ -9,6 +9,7 @@ public class CalculadoraTests {
     Calculadora calculadora;
     Double n1 = 14D;
     Double n2 = 76D;
+    Double result;
 
     @BeforeEach
     public void setup() {
@@ -18,8 +19,15 @@ public class CalculadoraTests {
     @Test
     @DisplayName("Teste de Aprovação :D - Soma")
     public void TestSum() {
-        Double result = calculadora.soma(n2, n1);
+        result = calculadora.soma(n2, n1);
 
-        assertEquals(n1+n2, result);
+        assertEquals(n1 + n2, result);
+    }
+
+    @Test
+    @DisplayName("Teste feliz - subtração")
+    public void TestSub() {
+        result = calculadora.subtracao(n2, n1);
+        assertEquals(n1 - n2, result);
     }
 }
