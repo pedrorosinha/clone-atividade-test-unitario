@@ -1,6 +1,8 @@
 package com.example.atividade;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,5 +40,22 @@ public class CalculadoraTests {
         assertEquals(n2*n1, result);
     }
 
-    
+    @DisplayName("Teste de aprovação - Divisão")
+    @Test
+    void TestDivisao() {
+        result = calculadora.divisao(n2, n1);
+        assertEquals(n2 / n1, result);
+    }
+
+    @DisplayName("Teste de excessão ")
+    @Test
+    void TesteExcessao(){
+        Double n1 = 50D;
+        Double n2 = 0D;
+        ArithmeticException result = assertThrows(ArithmeticException.class, ()->{
+            calculadora.divisao(n1, n2);
+        });
+
+        assertEquals("Impossible to divide by zero!", result.getMessage());
+    }
 }
