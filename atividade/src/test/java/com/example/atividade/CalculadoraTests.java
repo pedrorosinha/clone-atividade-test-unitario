@@ -27,7 +27,14 @@ public class CalculadoraTests {
     @Test
     @DisplayName("Teste feliz - subtração")
     public void TestSub() {
-        result = calculadora.subtracao(n2, n1);
+        result = calculadora.subtracao(n1,n2);
         assertEquals(n1 - n2, result);
+    }
+
+    @DisplayName("Teste de aprovação - Multiplicação")
+    @Test
+    void TestMultiplicacao() {
+        result = calculadora.multiplicacao(n2, n1);
+        assertEquals(n2*n1, result);
     }
 }
