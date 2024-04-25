@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.atividade.exceptions.CreatePersonException;
 import com.example.atividade.models.Person;
 import com.example.atividade.repository.PersonRepository;
 
@@ -30,7 +31,7 @@ public class PersonService {
 		logger.info("Finding one person!");
 		
 		return repository.findById(id)
-			.orElseThrow(() -> new RuntimeException("No records found for this ID!"));
+			.orElseThrow(() -> new CreatePersonException("No records found for this ID!"));
 	}
 	
 	public Person create(Person person) {
@@ -39,7 +40,7 @@ public class PersonService {
 
 		Optional<Person> savedPerson = repository.findByEmail(person.getEmail());
 		if(savedPerson.isPresent()) {
-			throw new RuntimeException(
+			throw new CreatePersonException(
 						"Person already exist with given e-Mail: " + person.getEmail());
 	}
 		
@@ -51,7 +52,7 @@ public class PersonService {
 		logger.info("Updating one person!");
 		
 		var entity = repository.findById(person.getId())
-			.orElseThrow(() -> new RuntimeException("No records found for this ID!"));
+			.orElseThrow(() -> new CreatePersonException("No records found for this ID!"));
 
 		entity.setFirstName(person.getFirstName());
 		entity.setLastName(person.getLastName());
@@ -66,7 +67,7 @@ public class PersonService {
 		logger.info("Deleting one person!");
 		
 		var entity = repository.findById(id)
-				.orElseThrow(() -> new RuntimeException("No records found for this ID!"));
+				.orElseThrow(() -> new CreatePersonException("No records found for this ID!"));
 		repository.delete(entity);
 	}
 }
