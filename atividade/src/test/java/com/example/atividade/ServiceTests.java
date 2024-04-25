@@ -74,4 +74,13 @@ public class ServiceTests {
 
         verify(personRepository, never()).save(any(Person.class));
     }
+
+    @Test
+    @DisplayName("Teste mockado para achar o id")
+    void FindbyIdTest() {
+        when(personRepository.findById(person.getId())).thenReturn(Optional.of(person));
+        Person pessoaSalva = personService.findById(1L);
+        assertNotNull(pessoaSalva);
+        assertEquals(person.getFirstName(), pessoaSalva.getFirstName());
+    }
 }
